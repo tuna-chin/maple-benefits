@@ -1,8 +1,26 @@
 # maple-benefits
 
+![maple-benefits banner](docs/screenshots/banner.png)
+
 **Canada PR Life Tracker** — A free, open-source tool for new Canadian permanent residents to discover, calculate, and track federal and provincial benefits.
 
-🇨🇦 [**Try it now → maple-benefits.github.io**](https://maple-benefits.github.io)
+🇨🇦 [**Try it now → hehexiake.github.io/maple-benefits**](https://hehexiake.github.io/maple-benefits)
+
+---
+
+## 🔒 Your data never leaves your device
+
+Unlike other platforms that require you to create an account or upload personal information to their servers, everything in maple-benefits stays on **your device**:
+
+| What | Where it lives |
+|------|---------------|
+| Your profile (income, family, status) | Browser `localStorage` — your device only |
+| Benefit calculations | Runs entirely in your browser — no backend |
+| AI API keys | Memory only — never stored on any server |
+| AI analysis results | Sent only to the AI provider you choose (OpenAI / Google / Anthropic) — not to us |
+| Usage tracking | None. Zero telemetry. |
+
+You can verify this yourself: the entire app is a single `index.html` file. Open it offline and everything works except AI features. There is no server to send your data to.
 
 ---
 
@@ -13,9 +31,9 @@ If you recently got your Canadian PR, you're eligible for benefits worth thousan
 This tool helps you:
 
 - **Calculate** how much you can actually receive (not just "you might be eligible")
-- **Track** your application status across 20+ federal and BC benefits
+- **Track** your application status across 20 federal and BC benefits
 - **Get alerted** about policy changes, deadlines, and likely missed benefits
-- **Use AI** to scan your city for local programs and get personalized strategy — without any chat interface
+- **Use AI** to scan your city for local programs and get personalized strategy
 
 ---
 
@@ -27,33 +45,33 @@ This tool helps you:
 | Covers federal + provincial | ✅ | Partial | ❌ | ✅ |
 | AI-powered local benefit scan | ✅ | ❌ | ❌ | ❌ |
 | Works offline, zero backend | ✅ | ❌ | ❌ | ❌ |
+| No account required | ✅ | ✅ | ✅ | ❌ |
+| Your data stays local | ✅ | ❌ | ❌ | ❌ |
 | Open source | ✅ | ❌ | ❌ | ❌ |
 
 ---
 
 ## How to use
 
-**Option 1 — Web (recommended)**  
-Open [maple-benefits.github.io](https://maple-benefits.github.io) in any browser. No install, no account.
+**Option 1 — Web (recommended)**
+Open [hehexiake.github.io/maple-benefits](https://hehexiake.github.io/maple-benefits) in any browser. No install, no account, no sign-up.
 
-**Option 2 — Offline**  
-Download `index.html`, double-click to open. Works fully offline (AI features require an API key).
+**Option 2 — Fully offline**
+Download `index.html`, double-click to open. Works 100% offline. AI features require an API key but the rest of the app is fully functional without internet.
 
 ---
 
 ## AI features
 
-The AI features are **optional** and require your own API key (OpenAI, Google Gemini, or Anthropic Claude).
+AI is **optional**. The core benefit calculator, tracker, and alerts work completely without it.
 
-Without AI, the tool is 100% functional — it calculates all benefit amounts, tracks status, and alerts you to changes.
+If you want AI features, you provide your own API key (OpenAI, Google Gemini, or Anthropic Claude). The key is stored **in memory only** for the current browser session — it is never written to disk, never sent to any server other than the AI provider you choose, and disappears when you close the tab.
 
-With AI, you unlock:
-- **City benefit scan** — AI searches for municipal and community programs in your city (impossible to hardcode for hundreds of cities)
+With AI you unlock:
+- **City benefit scan** — finds municipal and community programs in your city
 - **Gap check** — finds benefits you likely qualify for but haven't applied to
 - **Cross-benefit optimization** — analyzes how RRSP/FHSA contributions affect your total benefit income
-- **Scenario diagnosis** — structured action plans for life events (new baby, divorce, job loss, buying a home)
-
-Your API key stays in your browser. It is never sent to any server other than the AI provider you choose.
+- **Scenario diagnosis** — action plans for life events (new baby, divorce, job loss, buying a home)
 
 ---
 
@@ -72,7 +90,7 @@ Data is updated annually to align with Canada's benefit year (July–June).
 
 ## Contributing
 
-We especially need help with **provincial data** — if you live in Ontario, Alberta, Quebec, or another province and know the local benefits, you can contribute without writing any code.
+We especially need help with **provincial data**. If you live in Ontario, Alberta, Quebec, or another province, you can contribute benefit data without writing any code — just fill in a JSON template.
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
@@ -81,8 +99,6 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 ## Disclaimer
 
 This tool is for informational purposes only. Benefit amounts are estimates based on publicly available CRA and provincial government data. This is not tax or legal advice. Always verify with official sources before making financial decisions.
-
-Data is labeled with its effective benefit year. AI-generated content may be outdated — always check the official link provided.
 
 ---
 
