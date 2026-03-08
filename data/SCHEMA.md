@@ -42,14 +42,16 @@ data/
 | Field | Type | Description |
 |-------|------|-------------|
 | `id` | string | Unique ID. Federal: `F1`–`F99`. Provincial: `[CODE]-P1` e.g. `ON-P1` |
-| `name` | string | Chinese name (primary display) |
-| `en` | string | English name |
+| `name` | string | Chinese name (displayed in 中文 mode) |
+| `en` | string | English name (displayed in EN mode) |
 | `scope` | `"federal"` \| `"provincial"` | |
 | `dataAsOf` | string | Benefit year this data reflects, e.g. `"2025-26"` |
 | `max` | string | Human-readable maximum amount string |
 | `url` | string | Official government URL |
-| `desc` | string | 1–2 sentence description in Chinese |
-| `conditions` | string[] | Eligibility conditions list (Chinese) |
+| `desc` | string | 1–2 sentence description in **Chinese** (shown in 中文 mode) |
+| `desc_en` | string | 1–2 sentence description in **English** (shown in EN mode) |
+| `conditions` | string[] | Eligibility conditions list in **Chinese** |
+| `conditions_en` | string[] | Eligibility conditions list in **English** |
 
 ### Optional: `calculation` object
 
@@ -89,6 +91,6 @@ Until `build.sh` is run, `index.html` uses its own embedded BENEFITS array.
 
 1. **Every amount must have a source URL** in `_meta.sources`
 2. **`lastVerified` is mandatory** — stale data with no date will be flagged
-3. **`conditions` must be in Chinese** (the app UI is Chinese-first)
+3. **Bilingual required**: provide both `desc` + `conditions` (Chinese) and `desc_en` + `conditions_en` (English)
 4. **Don't remove existing fields** — only add or update
 5. One PR per province / per benefit year update

@@ -4,7 +4,7 @@
 
 **Canada PR Life Tracker** — A free, open-source tool for new Canadian permanent residents to discover, calculate, and track federal and provincial benefits.
 
-🇨🇦 [**Try it now → hehexiake.github.io/maple-benefits**](https://hehexiake.github.io/maple-benefits)
+🌐 Bilingual (English / 中文) · 🇨🇦 [**Try it now → hehexiake.github.io/maple-benefits**](https://hehexiake.github.io/maple-benefits)
 
 ---
 
@@ -33,7 +33,9 @@ This tool helps you:
 - **Calculate** how much you can actually receive (not just "you might be eligible")
 - **Track** your application status across 20 federal and BC benefits
 - **Get alerted** about policy changes, deadlines, and likely missed benefits
+- **Next Actions panel** — shows exactly what to apply for next, ranked by amount
 - **Use AI** to scan your city for local programs and get personalized strategy
+- **Bilingual** — full English / 中文 toggle, preference saved in localStorage
 
 ---
 
@@ -47,6 +49,7 @@ This tool helps you:
 | Works offline, zero backend | ✅ | ❌ | ❌ | ❌ |
 | No account required | ✅ | ✅ | ✅ | ❌ |
 | Your data stays local | ✅ | ❌ | ❌ | ❌ |
+| Bilingual EN / 中文 | ✅ | ❌ | ❌ | ❌ |
 | Open source | ✅ | ❌ | ❌ | ❌ |
 
 ---
@@ -58,6 +61,23 @@ Open [hehexiake.github.io/maple-benefits](https://hehexiake.github.io/maple-bene
 
 **Option 2 — Fully offline**
 Download `index.html`, double-click to open. Works 100% offline. AI features require an API key but the rest of the app is fully functional without internet.
+
+---
+
+## Changelog
+
+### v1.3 (2026-03)
+- Full bilingual support (English default + 中文 toggle, persists in localStorage)
+- All benefit status tracking now uses internal keys — language-safe and migration-resistant
+- Next Actions panel on Dashboard: eligible unapplied benefits ranked by amount
+- Library filter bar: All / Pending / Applied+Receiving
+- Dashboard stat cards are now clickable shortcuts to filtered views
+- Benefit detail view uses language-appropriate `desc_en` / `conditions_en` fields
+- Fixed: `dismissAlert`, `selectBenefit`, `toggleStep` crash on interaction
+- Fixed: timeline and CCB alert logic broken after language switch
+
+### v1.2.2
+- Initial public release
 
 ---
 

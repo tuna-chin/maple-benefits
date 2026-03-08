@@ -31,14 +31,16 @@ Minimum required for each benefit:
 ```json
 {
   "id": "ON-P1",
-  "name": "Chinese name",
-  "en": "English name",
+  "name": "中文福利名称",
+  "en": "English Benefit Name",
   "scope": "provincial",
   "dataAsOf": "2025-26",
   "max": "Maximum amount string",
   "url": "https://official.gov.url",
-  "desc": "One sentence description in Chinese.",
-  "conditions": ["Condition 1 in Chinese", "Condition 2"]
+  "desc": "一两句中文描述。",
+  "desc_en": "One or two sentence English description.",
+  "conditions": ["条件1（中文）", "条件2"],
+  "conditions_en": ["Condition 1 in English", "Condition 2"]
 }
 ```
 

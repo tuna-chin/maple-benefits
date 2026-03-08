@@ -24,7 +24,7 @@ This is the most valuable contribution. If you live in a province other than BC,
 - ✅ Every benefit amount **must have a source** — link to the official government page in `_meta.sources`
 - ✅ Set `lastVerified` to today's date
 - ✅ Use the correct `benefitYear` (e.g. `"2025-26"`)
-- ✅ Conditions text should be in **Chinese** (the app is Chinese-first)
+- ✅ `desc` and `conditions` are the **Chinese** versions; always also provide `desc_en` and `conditions_en` in **English**
 - ✅ Dollar amounts in `calculation` must be **numbers**, not strings
 - ❌ Do not add benefits you cannot verify with an official source
 - ❌ Do not modify `federal.json` without a source — federal data affects all provinces
