@@ -9,7 +9,7 @@
 ## 一、录制前准备（5分钟）
 
 ### 浏览器设置
-1. 打开 Chrome，访问 `hehexiake.github.io/maple-benefits`
+1. 打开 Chrome，访问 `tuna-chin.github.io/maple-benefits`
 2. 按 `Cmd + Shift + B` 隐藏书签栏
 3. 按 `Cmd + -` 缩小一级，让界面更完整（或保持默认）
 4. 窗口大小调整为约 **1200 × 750**，不要全屏
@@ -74,7 +74,7 @@
 [0:24 - 0:28]  画面：定格回看板首页
 字幕：免费 · 不用注册 · 数据不离开你的手机
       （最后1秒切换为：）
-      hehexiake.github.io/maple-benefits
+      tuna-chin.github.io/maple-benefits
 动作：点回看板首页，静止
 ```
 
@@ -90,7 +90,7 @@
 | 0:15 | **$2,847 / 月** | 黄色或橙色，大字，居中 |
 | 0:17 | 你可能一项都没申请 | 白色粗体，居中 |
 | 0:24 | 免费 · 不用注册 · 数据不离开你的手机 | 白色小字，底部 |
-| 0:27 | hehexiake.github.io/maple-benefits | 蓝色，居中 |
+| 0:27 | tuna-chin.github.io/maple-benefits | 蓝色，居中 |
 
 ---
 
@@ -147,10 +147,10 @@
 填一下家庭情况，自动算出你每月/年可以领多少钱
 不用注册，不用下载，打开就用，数据全在你本地
 
-hehexiake.github.io/maple-benefits
+tuna-chin.github.io/maple-benefits
 
 开源，欢迎贡献其他省的数据 👇
-github.com/hehexiake/maple-benefits
+github.com/tuna-chin/maple-benefits
 ```
 
 **发布格式：** 视频 + 文案，不要只发链接

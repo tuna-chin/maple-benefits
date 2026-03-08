@@ -7,11 +7,11 @@
 [![Offline Ready](https://img.shields.io/badge/offline-ready-brightgreen)]()
 [![No Backend](https://img.shields.io/badge/backend-none-green)]()
 [![Languages](https://img.shields.io/badge/lang-EN%20%7C%20中文-red)]()
-[![GitHub Pages](https://github.com/hehexiake/maple-benefits/actions/workflows/pages/pages-build-deployment/badge.svg)](https://hehexiake.github.io/maple-benefits)
+[![GitHub Pages](https://github.com/tuna-chin/maple-benefits/actions/workflows/pages/pages-build-deployment/badge.svg)](https://tuna-chin.github.io/maple-benefits)
 
 **Canada PR Life Tracker** — A free, open-source tool for new Canadian permanent residents to discover, calculate, and track federal and provincial benefits.
 
-🌐 Bilingual (English / 中文) · 🇨🇦 [**Try it now → hehexiake.github.io/maple-benefits**](https://hehexiake.github.io/maple-benefits)
+🌐 Bilingual (English / 中文) · 🇨🇦 [**Try it now → tuna-chin.github.io/maple-benefits**](https://tuna-chin.github.io/maple-benefits)
 
 ---
 
@@ -87,7 +87,7 @@ This tool helps you:
 ## How to use
 
 **Option 1 — Web (recommended)**
-Open [hehexiake.github.io/maple-benefits](https://hehexiake.github.io/maple-benefits) in any browser. No install, no account, no sign-up.
+Open [tuna-chin.github.io/maple-benefits](https://tuna-chin.github.io/maple-benefits) in any browser. No install, no account, no sign-up.
 
 **Option 2 — Fully offline**
 Download `index.html`, double-click to open. Works 100% offline. AI features require an API key but the rest of the app is fully functional without internet.
