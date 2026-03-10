@@ -256,7 +256,7 @@ en: {
   calc_cwb_advance:'incl. advance',
   calc_p2_max:'Up to $1,250/child/mo',
   calc_p3_max:'Up to $350/child/mo',
-  calc_p4_suffix:' (est.)',
+  calc_p4_suffix:'/mo (est.)',
   calc_p8_max:'Up to $1,060/mo ($560 support + $500 housing)',
   calc_p9_max:'Up to $400/yr',
   calc_ei_max:' (max 52 wks)',
@@ -641,8 +641,8 @@ function calculateEligibility(p){
   const inBC=getCurrentProvince()==='BC';
   const r={
     F1:hasPR&&hasTax&&hasKid&&isPrimary,
-    F2:hasPR&&hasTax,
-    F3:hasJob&&inc>0&&inc<49393,
+    F2:hasPR&&hasTax&&(!p.income2024||inc<65000),
+    F3:hasJob&&inc>0&&inc<(hasKid?49393:37742),
     F4:!hasInsurance&&inc<90000&&hasTax,
     F5:hasJob,
     F6:hasRESP&&hasKid&&inc<57375,
@@ -1577,10 +1577,10 @@ function changeKeyStorage(mode){
   if(mode===settings.keyStorage)return;
   if(mode==='session'){
     showConfirm(t('confirm_title'),LANG.current==='zh'?'确认将API Key保存到浏览器sessionStorage？安全性较低，仅在可信设备使用。':'Save API keys to sessionStorage? Lower security — only use on trusted devices.',()=>{
-      settings.keyStorage='session';sessionStorage.setItem('prt_ai_keys',JSON.stringify(aiMemoryKeys));saveSettings();if(currentPage==='settings')renderPage('settings');
+      settings.keyStorage='session';sessionStorage.setItem('prt_ai_keys',JSON.stringify(aiMemoryKeys));saveSettings();if(currentPage==='settings')navigate('settings');
     });return;
   }
-  settings.keyStorage='memory';sessionStorage.removeItem('prt_ai_keys');saveSettings();if(currentPage==='settings')renderPage('settings');
+  settings.keyStorage='memory';sessionStorage.removeItem('prt_ai_keys');saveSettings();if(currentPage==='settings')navigate('settings');
 }
 
 function updateGlobalProvince(p){settings.province=p;if(!profile.province)profile.province=p;if(p!=='BC'){settings.city='';if(!profile.city)profile.city='';}saveSettings();saveProfile();syncCityOptions('settings-city',p,settings.city||'');}
