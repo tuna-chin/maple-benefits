@@ -159,6 +159,33 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
 .profile-empty-banner .btn-peb{flex-shrink:0;background:#d97706;color:#fff;border:none;border-radius:8px;padding:7px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
 .profile-empty-banner .btn-peb:hover{background:#b45309}
 @media(max-width:600px){.welcome-cards{grid-template-columns:1fr}.welcome-title{font-size:26px}.profile-empty-banner{flex-direction:column;align-items:flex-start}}
+/* ---- Dashboard value-visualization hero ---- */
+.value-hero{cursor:default;display:flex;flex-direction:column}
+.value-hero:hover{border-color:var(--border);box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.vh-label{font-size:11.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.6px}
+.vh-big{font-size:46px;font-weight:800;letter-spacing:-2px;line-height:1;margin-top:8px;color:var(--primary);animation:vhIn .5s ease}
+.vh-yr-lg{font-size:18px;font-weight:700;color:var(--muted);letter-spacing:0;margin-left:4px}
+@keyframes vhIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.vh-sub{font-size:12px;color:var(--muted);margin-top:7px}
+.vh-bar{height:10px;border-radius:6px;background:var(--primary-light);margin-top:16px;overflow:hidden}
+.vh-bar-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--success),#34d399);transition:width .6s ease;min-width:2px}
+.vh-legend{display:flex;gap:18px;margin-top:10px;font-size:12px;color:var(--text);flex-wrap:wrap}
+.vh-legend b{font-family:'DM Mono',monospace}
+.vh-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;vertical-align:middle}
+.vh-dot-claimed{background:var(--success)}
+.vh-dot-unclaimed{background:var(--primary)}
+.vh-gaps{margin-top:18px;border-top:1px solid var(--border);padding-top:12px}
+.vh-gaps-title{font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.vh-gap{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:8px;cursor:pointer;transition:background .15s}
+.vh-gap:hover{background:var(--primary-light)}
+.vh-gap-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:150px}
+.vh-gap-dots{flex:1;border-bottom:1px dotted var(--border);height:1px;margin:0 2px}
+.vh-gap-amt{font-family:'DM Mono',monospace;font-size:13px;font-weight:600;white-space:nowrap}
+.vh-yr{font-size:10px;color:var(--muted);margin-left:1px}
+.vh-gap-cta{font-size:11px;font-weight:700;color:var(--primary);white-space:nowrap}
+.vh-empty{text-align:center;padding:20px 8px;margin:auto 0}
+.vh-empty-title{font-size:18px;font-weight:800}
+.vh-empty-sub{font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5}
 </style>
 </head>
 <body>
@@ -262,6 +289,10 @@ en: {
   stat_monthly:'EST. MONTHLY', stat_applied:'APPLIED', stat_pending:'PENDING', stat_missed:'MISSED',
   stat_monthly_hint:'click to view details', stat_applied_hint:'click to filter', stat_pending_hint:'click to act', stat_missed_hint:'click to view',
   cards_title:'Benefits Overview', timeline_title:'Next 60-Day Schedule', nextactions_title:'Recommended Next Steps',
+  dash_leaving:'You may be leaving on the table', dash_eligible_ctx:'of <b>{amt}</b> you may be eligible for',
+  dash_claimed:'Claimed', dash_unclaimed:'Unclaimed', dash_topgaps:'Top gaps to claim', dash_apply:'Apply',
+  dash_all_claimed:"You're claiming everything you qualify for 🎉",
+  dash_fill_hero:'See how much you could receive', dash_fill_hero_sub:'Fill in your profile and we’ll estimate your annual benefits.',
   nextactions_empty:'🎉 All eligible benefits tracked! Check alerts for updates.',
   nextactions_apply:'Apply →',
   profile_completeness:'Profile Completeness',
@@ -437,6 +468,10 @@ zh: {
   stat_monthly:'可领总金额/月', stat_applied:'已申请项数', stat_pending:'待处理项数', stat_missed:'漏领提醒',
   stat_monthly_hint:'点击查看详情', stat_applied_hint:'点击过滤', stat_pending_hint:'点击处理', stat_missed_hint:'点击查看',
   cards_title:'福利卡片总览', timeline_title:'未来60天发放日程', nextactions_title:'推荐下一步行动',
+  dash_leaving:'你可能正错过这笔钱', dash_eligible_ctx:'全部可领 <b>{amt}</b>',
+  dash_claimed:'已申领', dash_unclaimed:'未申领', dash_topgaps:'最值得申领的缺口', dash_apply:'去申请',
+  dash_all_claimed:'你已申领所有符合资格的福利 🎉',
+  dash_fill_hero:'看看你能领多少', dash_fill_hero_sub:'填写档案即可估算你的年度福利。',
   nextactions_empty:'🎉 所有符合资格的福利均已跟进！查看提醒获取更新。',
   nextactions_apply:'立即申请 →',
   profile_completeness:'档案完整度',
@@ -931,16 +966,24 @@ function renderDashboard(){
   // pending = eligible + (no status OR unaware OR aware) — consistent with nextActions
   const pending=visible.filter(b=>elig[b.id]&&(!benefitStatus[b.id]||benefitStatus[b.id]==='unaware'||benefitStatus[b.id]==='aware')).length;
   const warnings=getUrgentAlerts().filter(a=>!alertsDismissed[a.id]).length;
-  let total=0;
+  let total=0,claimedM=0,unclaimedM=0;const gaps=[];
   visible.forEach(b=>{
     if(!elig[b.id])return;
     const amt=estimateAmount(b.id,profile);
     const m=amt.match(/\$([0-9,]+)/);
     if(!m)return;
     const n=parseInt(m[1].replace(/,/g,''),10);
-    if(amt.includes(t('calc_per_month')))total+=n;
-    else if(amt.includes(t('calc_per_year')))total+=n/12;
+    let monthly=0;
+    if(amt.includes(t('calc_per_month')))monthly=n;
+    else if(amt.includes(t('calc_per_year')))monthly=n/12;
+    if(monthly<=0)return;
+    total+=monthly;
+    if(['receiving','applied'].includes(benefitStatus[b.id]))claimedM+=monthly;
+    else{unclaimedM+=monthly;gaps.push({id:b.id,name:LANG.current==='en'?b.en:b.name,annual:Math.round(monthly*12)});}
   });
+  gaps.sort((a,b)=>b.annual-a.annual);
+  const totalA=Math.round(total*12),claimedA=Math.round(claimedM*12),unclaimedA=Math.round(unclaimedM*12);
+  const claimedPct=totalA>0?Math.round(claimedA/totalA*100):0;
 
   const scopeTag=b=>b.scope==='federal'
     ?`<span style="font-size:10px;background:#dbeafe;color:#1e40af;padding:2px 7px;border-radius:4px;font-weight:700">${t('tag_federal')}</span>`
@@ -964,13 +1007,33 @@ function renderDashboard(){
     </div>`;
   }).join('');
 
+  const gapRows=gaps.slice(0,3).map(g=>`<div class="vh-gap" onclick="openBenefit('${g.id}')">
+        <span class="vh-gap-name">${g.name}</span>
+        <span class="vh-gap-dots"></span>
+        <span class="vh-gap-amt">$${g.annual.toLocaleString()}<span class="vh-yr">${t('calc_per_year')}</span></span>
+        <span class="vh-gap-cta">${t('dash_apply')} →</span>
+      </div>`).join('');
+  let heroInner;
+  if(totalA<=0){
+    heroInner=`<div class="vh-empty">
+        <div class="vh-empty-title">${t('dash_fill_hero')}</div>
+        <div class="vh-empty-sub">${t('dash_fill_hero_sub')}</div>
+        <button class="btn-peb" onclick="navigate('profile')" style="margin-top:14px">${t('profile_banner_btn')}</button>
+      </div>`;
+  }else{
+    const onTable=unclaimedA>0;
+    heroInner=`<div class="vh-label">${onTable?t('dash_leaving'):t('dash_all_claimed')}</div>
+      <div class="vh-big">$${(onTable?unclaimedA:claimedA).toLocaleString()}<span class="vh-yr-lg">${t('calc_per_year')}</span></div>
+      <div class="vh-sub">${t('dash_eligible_ctx').replace('{amt}','$'+totalA.toLocaleString()+t('calc_per_year'))}</div>
+      <div class="vh-bar"><div class="vh-bar-fill" style="width:${claimedPct}%"></div></div>
+      <div class="vh-legend">
+        <span><i class="vh-dot vh-dot-claimed"></i>${t('dash_claimed')} <b>$${claimedA.toLocaleString()}</b></span>
+        <span><i class="vh-dot vh-dot-unclaimed"></i>${t('dash_unclaimed')} <b>$${unclaimedA.toLocaleString()}</b></span>
+      </div>
+      ${gaps.length?`<div class="vh-gaps"><div class="vh-gaps-title">${t('dash_topgaps')}</div>${gapRows}</div>`:''}`;
+  }
   const stats=`<div class="stats-hero-grid">
-    <div class="stat stat-hero" onclick="navigate('library')" title="${t('stat_monthly_hint')}">
-      <div class="bar" style="background:linear-gradient(180deg,var(--primary),#818cf8)"></div>
-      <div class="label">${t('stat_monthly')}</div>
-      <div class="value">$${Math.round(total).toLocaleString()}</div>
-      <div class="hint">${t('stat_monthly_hint')}</div>
-    </div>
+    <div class="stat stat-hero value-hero">${heroInner}</div>
     <div class="stats-mini">
       <div class="stat stat-mini" onclick="filterLibrary('applied')" title="${t('stat_applied_hint')}">
         <div class="bar" style="background:linear-gradient(180deg,var(--success),#34d399)"></div>
