@@ -3,7 +3,7 @@
 <img src="docs/logo.png" width="120" alt="maple-benefits logo" align="right">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-v1.3-blue)]()
+[![Version](https://img.shields.io/badge/version-v1.6-blue)]()
 [![Offline Ready](https://img.shields.io/badge/offline-ready-brightgreen)]()
 [![No Backend](https://img.shields.io/badge/backend-none-green)]()
 [![Languages](https://img.shields.io/badge/lang-EN%20%7C%20中文-red)]()
@@ -124,6 +124,12 @@ Data is updated annually to align with Canada's benefit year (July–June).
 ---
 
 ## Changelog
+
+### v1.6 (2026-05-31) — Dashboard redesign, motion & accessibility
+- **Dashboard value visualization** — the hero now leads with how much you may be *leaving on the table* (unclaimed annual total), a claimed-vs-unclaimed progress bar, and the top 3 gaps to claim with one-tap deep links. Applied/Pending/Missed quick filters preserved.
+- **Motion layer** — count-up on the hero figures, progress-bar fill, subtle page transitions, hover lift and press feedback. Fully honours `prefers-reduced-motion`.
+- **Accessibility** — all 40 clickable cards/rows are now keyboard-operable (`role` + `tabindex` + Enter/Space), with a visible focus ring; landmarks and ARIA labels added; text/badge contrast raised to WCAG AA (5.2–6.3:1).
+- Presentation-only: no changes to benefit data, calculations, or eligibility.
 
 ### v1.5 (2026-05-31) — 2026-27 benefit-year reindex
 - **Federal data updated to the 2026-27 benefit year** (effective July 1, 2026, 2.0% indexation).
