@@ -22,7 +22,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js"></script>
 <style>
-:root{--primary:#C41E3A;--primary-dark:#9E1830;--primary-light:#FCEAED;--success:#059669;--success-light:#D1FAE5;--warning:#D97706;--warning-light:#FEF3C7;--danger:#DC2626;--danger-light:#FEE2E2;--border:#E5DED5;--text:#1A1410;--muted:#7A7068;--bg:#F5F1EC;--surface:#FFFFFE;--sidebar-w:230px;}
+:root{--primary:#C41E3A;--primary-dark:#9E1830;--primary-light:#FCEAED;--success:#059669;--success-light:#D1FAE5;--warning:#D97706;--warning-light:#FEF3C7;--danger:#DC2626;--danger-light:#FEE2E2;--border:#E5DED5;--text:#1A1410;--muted:#675E55;--bg:#F5F1EC;--surface:#FFFFFE;--sidebar-w:230px;}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
 #sidebar{position:fixed;left:0;top:0;bottom:0;width:var(--sidebar-w);background:#1C1410;color:#E8E2DA;z-index:100;display:flex;flex-direction:column;transition:transform .25s ease}
@@ -58,7 +58,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
 .stat .bar{position:absolute;left:0;top:0;bottom:0;width:4px;opacity:0.85}
 .stat .label{font-size:10.5px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px}
 .stat .value{font-size:32px;font-weight:800;margin-top:6px;letter-spacing:-1px;line-height:1}
-.stat .hint{font-size:11px;color:var(--muted);margin-top:8px;opacity:0.7}
+.stat .hint{font-size:11px;color:var(--muted);margin-top:8px}
 .stats-hero-grid{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px}
 .stats-mini{display:flex;flex-direction:column;gap:10px}
 .stat-hero{padding:22px 22px 22px 26px}
@@ -74,11 +74,11 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
 .benefit-en{font-size:11px;color:var(--muted)}
 .benefit-amt{font-family:'DM Mono',monospace;color:var(--text);font-size:14px;font-weight:600;letter-spacing:-0.2px}
 .badge-pill{display:inline-flex;align-items:center;gap:4px;border-radius:6px;padding:3px 9px;font-size:10.5px;font-weight:600;letter-spacing:0.1px}
-.badge-unaware{background:#EDE8E2;color:#7A7068}
+.badge-unaware{background:#EDE8E2;color:var(--muted)}
 .badge-aware{background:var(--warning-light);color:#92400e}
 .badge-applied{background:#dbeafe;color:#1e40af}
 .badge-receiving{background:var(--success-light);color:#065f46}
-.badge-ineligible{background:#EDE8E2;color:#9E948C}
+.badge-ineligible{background:#EDE8E2;color:var(--muted)}
 .btn{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;font-size:13px;font-weight:700;transition:all .15s}
 .btn-primary{background:var(--primary);color:#fff}.btn-primary:hover{background:var(--primary-dark)}
 .btn-outline{background:#fff;border:1px solid var(--border)}.btn-outline:hover{background:#f8fafc}
@@ -196,10 +196,14 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
 .btn:active,.benefit-card:active,.vh-gap:active,.action-item:active,.lib-item:active{transform:scale(.978)}
 .vh-bar-fill{transition:width .7s var(--ease-quart)}
 @media(prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}}
+/* ---- Keyboard focus indicator (a11y) ---- */
+:focus-visible{outline:2px solid var(--primary);outline-offset:2px;border-radius:6px}
+.nav-item:focus-visible{outline-offset:-2px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
 </style>
 </head>
 <body>
-<nav id="sidebar">
+<nav id="sidebar" aria-label="Main navigation">
   <div class="sidebar-logo" style="display:flex;align-items:center;gap:10px;cursor:pointer" onclick="navigate('welcome')" title="Back to intro"><img src="docs/favicon.png" width="28" height="28" style="border-radius:5px;flex-shrink:0"><div><h1>Canada Benefits Tracker</h1><p>v1.5</p></div></div>
   <div class="lang-switcher">
     <div class="lang-pill">
@@ -227,10 +231,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text)}
       <span style="font-size:12px;color:var(--muted)" id="header-completeness-label"></span>
       <div style="width:110px;height:6px;background:#e5e7eb;border-radius:999px;overflow:hidden"><div id="header-progress" style="height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--success))"></div></div>
       <span style="font-size:12px;font-weight:700;color:var(--primary)" id="header-pct">0%</span>
-      <button class="btn btn-outline" id="mobile-btn" onclick="toggleSidebar()" style="display:none">☰</button>
+      <button class="btn btn-outline" id="mobile-btn" onclick="toggleSidebar()" style="display:none" aria-label="Toggle navigation menu" aria-controls="sidebar" aria-expanded="false">☰</button>
     </div>
   </header>
-  <div class="content" id="page-content"></div>
+  <div class="content" id="page-content" role="main" aria-label="Page content"></div>
 </div>
 <div id="toast"></div>
 <div class="modal" id="confirm-modal">
@@ -903,6 +907,7 @@ function navigate(page){
   const renders={dashboard:renderDashboard,profile:renderProfile,alerts:renderAlerts,library:renderLibrary,advisor:renderAdvisor,settings:renderSettings};
   el.innerHTML=(renders[page]||renders.dashboard)();
   el.classList.remove('page-anim');void el.offsetWidth;el.classList.add('page-anim');
+  enhanceA11y(el);
   if(page==='dashboard')afterDashboardRender();
   if(page==='profile')afterProfileRender();
   if(page==='settings')bindSettingsEvents();
@@ -937,6 +942,31 @@ function afterDashboardRender(){
       if(el.firstChild&&el.firstChild.nodeType===3)animateCountNode(el.firstChild);
     }));
 }
+
+/* ============================================================
+   A11Y — make clickable <div>s keyboard-operable (presentation-only)
+   ============================================================ */
+const A11Y_SEL='.nav-item,.stat,.stat-mini,.benefit-card,.lib-item,.action-item,.section-header,.vh-gap,.sidebar-logo,.sidebar-cta,.alert-check,.step-check';
+function enhanceA11y(root){
+  (root||document).querySelectorAll(A11Y_SEL).forEach(el=>{
+    const isCheck=el.classList.contains('alert-check')||el.classList.contains('step-check');
+    if(!el.dataset.a11y){
+      el.dataset.a11y='1';
+      if(!el.hasAttribute('role'))el.setAttribute('role',isCheck?'checkbox':'button');
+      if(!el.hasAttribute('tabindex'))el.setAttribute('tabindex','0');
+    }
+    if(isCheck){
+      const on=el.classList.contains('checked')||(el.textContent||'').indexOf('✓')>=0;
+      el.setAttribute('aria-checked',on?'true':'false');
+    }
+  });
+}
+// One global delegate: Enter/Space activates any enhanced control
+document.addEventListener('keydown',e=>{
+  const el=e.target;
+  if(!el||!el.dataset||el.dataset.a11y!=='1')return;
+  if(e.key==='Enter'||e.key===' '||e.key==='Spacebar'){e.preventDefault();el.click();}
+});
 
 /* ============================================================
    STATUS HELPERS
@@ -1471,7 +1501,7 @@ function renderBenefitDetail(id){
     ${steps.map((s,i)=>`<div style="display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--border)">
       <div style="width:20px;height:20px;border-radius:50%;background:var(--primary-light);color:var(--primary);font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0">${i+1}</div>
       <div style="flex:1;font-size:13px">${s}</div>
-      <div onclick="toggleStep('${id}',${i})" style="width:18px;height:18px;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:${stepsDone[id+'-'+i]?'var(--success)':'#fff'};color:#fff;flex-shrink:0">${stepsDone[id+'-'+i]?'✓':''}</div>
+      <div class="step-check" onclick="toggleStep('${id}',${i})" style="width:18px;height:18px;border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:${stepsDone[id+'-'+i]?'var(--success)':'#fff'};color:#fff;flex-shrink:0">${stepsDone[id+'-'+i]?'✓':''}</div>
     </div>`).join('')}
     ${libraryAIResult[id]?`<div style="margin-top:12px">${renderAIMarkdown(libraryAIResult[id])}</div>`:''}
   </div>`;
@@ -1882,6 +1912,7 @@ function updateSidebar(){
       <div style="font-size:10.5px;color:#9E948C">${t('sidebar_setup_sub')} →</div>
     </div>`;
   }
+  enhanceA11y(footer);
 }
 
 function showToast(msg){
@@ -1904,7 +1935,7 @@ function closeConfirm(runCancel=true){
   if(!runCancel)cancelCb=null;
 }
 
-function toggleSidebar(){document.getElementById('sidebar').classList.toggle('open');}
+function toggleSidebar(){const open=document.getElementById('sidebar').classList.toggle('open');const b=document.getElementById('mobile-btn');if(b)b.setAttribute('aria-expanded',open?'true':'false');}
 
 function escapeHtml(str){
   return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
@@ -1928,6 +1959,7 @@ function init(){
   const welcomed=localStorage.getItem('prt_welcomed');
   navigate(welcomed?'dashboard':'welcome');
   checkMobile();
+  enhanceA11y(document); // static sidebar (nav items, logo, CTA)
 }
 init();
 </script>
