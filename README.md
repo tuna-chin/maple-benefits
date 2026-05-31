@@ -130,6 +130,9 @@ Data is updated annually to align with Canada's benefit year (July–June).
 - **GST/HST Credit → Canada Groceries & Essentials Benefit (CGEB)** — F2 renamed; amounts now reflect the permanent +25% increase (single ~$679/yr, couple ~$890/yr steady-state). One-time spring top-up documented. Newcomer RC151 registration path added.
 - **CCB** reindexed: max $8,157 (<6) / $6,883 (6–17); phase-out thresholds $38,237 / $82,847.
 - **Canada Disability Benefit** reindexed: $204/mo ($2,448/yr).
+- **Canada Workers Benefit (F3)** aligned to the 2026-27 cycle — amounts already on the correct 2025 tax-year basis; 2026-tax-year figures noted for 2027.
+- **EI maternity/parental (F5)** corrected: max weekly benefit $668 (stale, 2024) → **$729** (2026, MIE $68,900); extended-parental rate noted ($437/wk @ 33%).
+- **Canada Learning Bond (F6)** — $2,000 lifetime max unchanged; income threshold kept at 2025-26 with a pending note (2026-27 ESDC brackets not yet published).
 - Calculation engine in `index.html` updated to match (note: `build.sh` injects only display fields — calc constants are maintained directly).
 - `_meta` now carries `effectiveFrom` / `nextReindexDue` (2027-07-01) for staleness tracking.
 

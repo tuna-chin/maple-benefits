@@ -198,21 +198,30 @@
       "en": "Employment Insurance Parental/Maternity",
       "cat": "federal",
       "scope": "federal",
-      "dataAsOf": "2025-26",
-      "max": "55% 收入最高52周",
-      "url": "https://www.canada.ca/en/services/benefits/ei/ei-maternity-parental/apply.html",
-      "desc": "为新父母提供收入替代。",
-      "desc_en": "Income replacement for new parents.",
+      "dataAsOf": "2026",
+      "max": "55% 收入，最高 $729/周（标准，2026）",
+      "url": "https://www.canada.ca/en/services/benefits/ei/ei-maternity-parental/benefit-amount.html",
+      "desc": "为新父母提供收入替代。标准方案55%替代率最高$729/周；延长方案33%替代率最高$437/周。需600可保小时。",
+      "desc_en": "Income replacement for new parents. Standard: 55% of earnings up to $729/wk; Extended: 33% up to $437/wk (2026). Requires 600 insurable hours.",
       "conditions": [
-        "有可保就业收入"
+        "有可保就业收入",
+        "近期累计满600可保小时"
       ],
       "conditions_en": [
-        "Insurable employment income"
+        "Insurable employment income",
+        "600 insurable hours"
       ],
       "calculation": {
+        "maxInsurableEarnings2026": 68900,
         "rate": 0.55,
-        "maxWeeklyBenefit": 668,
-        "maxWeeks": 52
+        "maxWeeklyBenefit": 729,
+        "extendedRate": 0.33,
+        "extendedMaxWeeklyBenefit": 437,
+        "maternityWeeks": 15,
+        "standardParentalWeeks": 40,
+        "extendedParentalWeeks": 69,
+        "maxWeeks": 52,
+        "basisNote": "EI follows the calendar year (2026 MIE $68,900), not the Jul-Jun benefit year. maxWeeks 52 is a ~1yr approximation (maternity 15 + standard parental 40 = 55wk)."
       }
     },
     {
