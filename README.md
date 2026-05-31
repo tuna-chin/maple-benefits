@@ -114,7 +114,7 @@ With AI you unlock:
 
 | Scope | Status |
 |-------|--------|
-| Federal (10 benefits) | ✅ Complete, verified 2025-26 |
+| Federal (10 benefits) | ✅ Complete, **2026-27 benefit year** (verified 2026-05-31) |
 | British Columbia (10 benefits) | ✅ Complete, verified 2025-26 |
 | Ontario | 🚧 Coming soon |
 | Other provinces | 🚧 Contributions welcome |
@@ -124,6 +124,14 @@ Data is updated annually to align with Canada's benefit year (July–June).
 ---
 
 ## Changelog
+
+### v1.5 (2026-05-31) — 2026-27 benefit-year reindex
+- **Federal data updated to the 2026-27 benefit year** (effective July 1, 2026, 2.0% indexation).
+- **GST/HST Credit → Canada Groceries & Essentials Benefit (CGEB)** — F2 renamed; amounts now reflect the permanent +25% increase (single ~$679/yr, couple ~$890/yr steady-state). One-time spring top-up documented. Newcomer RC151 registration path added.
+- **CCB** reindexed: max $8,157 (<6) / $6,883 (6–17); phase-out thresholds $38,237 / $82,847.
+- **Canada Disability Benefit** reindexed: $204/mo ($2,448/yr).
+- Calculation engine in `index.html` updated to match (note: `build.sh` injects only display fields — calc constants are maintained directly).
+- `_meta` now carries `effectiveFrom` / `nextReindexDue` (2027-07-01) for staleness tracking.
 
 ### v1.3.1 (2026-03-11)
 - **Welcome page** — first-time visitors now see a full-screen onboarding page (logo, value cards, dual badge for AI-Powered + Open Source, CTA to profile). Returning users go straight to dashboard.

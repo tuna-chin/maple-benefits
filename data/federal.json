@@ -1,13 +1,18 @@
 {
   "_meta": {
     "scope": "federal",
-    "benefitYear": "2025-26",
-    "basedOn": "2024 tax return",
-    "lastVerified": "2026-03-08",
+    "benefitYear": "2026-27",
+    "basedOn": "2025 tax return",
+    "lastVerified": "2026-05-31",
+    "effectiveFrom": "2026-07-01",
+    "nextReindexDue": "2027-07-01",
+    "indexation": "2.0%",
     "sources": [
-      "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit.html",
-      "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/gst-hst-credit.html"
-    ]
+      "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit/how-much.html",
+      "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit.html",
+      "https://www.canada.ca/en/services/benefits/disability/canada-disability-benefit/amount.html"
+    ],
+    "notes": "2026-27 reindex landed 2026-05-31 (effective Jul 1 2026). GST/HST Credit replaced by Canada Groceries & Essentials Benefit (CGEB): 2026-27 indexed GST base x1.25 permanent increase for 5 yrs, plus a one-time spring top-up (~50% of 2025-26). CCB & CDB reindexed at 2.0%."
   },
   "benefits": [
     {
@@ -16,8 +21,8 @@
       "en": "Canada Child Benefit",
       "cat": "federal",
       "scope": "federal",
-      "dataAsOf": "2025-26",
-      "max": "$7,997（<6岁）/ $6,748（6-17岁）/年",
+      "dataAsOf": "2026-27",
+      "max": "$8,157（<6岁）/ $6,883（6-17岁）/年",
       "url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit.html",
       "desc": "为有孩子的家庭提供免税月度补贴，基于收入和孩子数量计算。",
       "desc_en": "Tax-free monthly payments for families with children under 18, calculated based on income and number of children.",
@@ -34,10 +39,10 @@
         "Children under 18"
       ],
       "calculation": {
-        "maxUnder6PerChild": 7997,
-        "max6to17PerChild": 6748,
-        "phaseOut1Threshold": 37487,
-        "phaseOut2Threshold": 81222,
+        "maxUnder6PerChild": 8157,
+        "max6to17PerChild": 6883,
+        "phaseOut1Threshold": 38237,
+        "phaseOut2Threshold": 82847,
         "phaseOutRates": {
           "1child": {
             "tier1": 0.07,
@@ -56,59 +61,68 @@
             "tier2": 0.095
           }
         },
-        "nextYearAmounts": {
-          "effectiveJuly": "2026-07",
-          "maxUnder6PerChild": 8157,
-          "max6to17PerChild": 6883,
-          "phaseOut1Threshold": 38237,
-          "phaseOut2Threshold": 82847
+        "prevYearAmounts": {
+          "benefitYear": "2025-26",
+          "maxUnder6PerChild": 7997,
+          "max6to17PerChild": 6748,
+          "phaseOut1Threshold": 37487,
+          "phaseOut2Threshold": 81222
         }
       }
     },
     {
       "id": "F2",
-      "name": "GST/HST 退税",
-      "en": "GST/HST Credit",
+      "name": "CGEB 杂货与生活必需品福利（原GST/HST退税）",
+      "en": "Canada Groceries & Essentials Benefit (formerly GST/HST Credit)",
       "cat": "federal",
       "scope": "federal",
-      "dataAsOf": "2025-26",
-      "max": "$533（单人）/ $698（夫妻）/年",
-      "url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/gst-hst-credit/get-credit.html",
-      "desc": "低中收入个人和家庭的季度免税退税，自动通过报税申请。2026年7月起改名为Canada Groceries and Essentials Benefit (CGEB) 并增加25%。",
-      "desc_en": "Quarterly tax-free payments for low- and moderate-income individuals and families. Auto-applied via tax filing. Increases 25% in July 2026.",
+      "dataAsOf": "2026-27",
+      "max": "$679（单人）/ $890（夫妻）/年 + 一次性春季补发",
+      "url": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-groceries-essentials-benefit.html",
+      "desc": "原GST/HST退税，2026年7月起改名为Canada Groceries and Essentials Benefit (CGEB)，季度免税补贴永久增加25%（持续5年），自动通过报税申请。2026年春季另有一次性补发（约2025-26年额度的50%）。新移民未报过税可用RC151表登记。",
+      "desc_en": "Formerly the GST/HST Credit, renamed to the Canada Groceries & Essentials Benefit (CGEB) from July 2026. Quarterly tax-free payments, permanently increased 25% (for 5 years). Auto-applied via tax filing; plus a one-time spring top-up (~50% of 2025-26 entitlement). Newcomers who haven't filed yet can register via Form RC151.",
       "conditions": [
-        "已完成报税",
-        "调整后家庭净收入低于约$65,000（家庭因孩子数量而异）",
-        "加拿大居民"
+        "已完成报税（新移民可用RC151表登记）",
+        "调整后家庭净收入低于约$65,000（因家庭人数而异）",
+        "年满19岁",
+        "加拿大税务居民"
       ],
       "conditions_en": [
-        "Filed taxes",
-        "Adjusted family net income below ~$65,000",
-        "Canadian resident"
+        "Filed taxes (newcomers can register via Form RC151)",
+        "Adjusted family net income below ~$65,000 (varies by family size)",
+        "Age 19+",
+        "Canadian resident for tax purposes"
       ],
       "calculation": {
-        "baseSingle": 533,
-        "baseSpouseAddOn": 165,
-        "perChild": 184,
-        "singleLowIncomeMax": 157,
-        "singleLowIncomePhaseInStart": 11337,
-        "phaseOutThreshold": 44324,
+        "model": "2026-27 indexed GST base x1.25 (CGEB permanent +25%)",
+        "baseSingle": 678.75,
+        "baseSpouseAddOn": 211.25,
+        "perChild": 235,
+        "singleLowIncomeMax": 233.75,
+        "singleLowIncomePhaseInStart": 11564,
+        "singleLowIncomePhaseInRate": 0.02,
+        "phaseOutThreshold": 46432,
         "phaseOutRate": 0.05,
         "paymentDates": [
-          "Jan 5",
-          "Apr 5",
-          "Jul 5",
-          "Oct 5"
+          "Jul",
+          "Oct",
+          "Jan",
+          "Apr"
         ],
-        "CGEB": {
-          "announcement": "2026-01-26",
-          "oneTimeTopUp": "50% of 2025-26 entitlement",
-          "oneTimeTopUpDeadline": "2026-06-30",
-          "permanentIncrease": "25% for 5 years",
-          "effectiveJuly": "2026-07"
+        "indexedGstBase2026_27": {
+          "note": "Pre-25% indexed GST amounts (2.0% indexation) the CGEB is built on",
+          "baseSingle": 543,
+          "baseCouple": 712,
+          "perChild": 188,
+          "singleSupplement": 187
+        },
+        "oneTimeTopUp": {
+          "amount": "~50% of 2025-26 entitlement",
+          "paid": "2026 spring (~June 5)",
+          "auto": true
         }
       },
-      "notes": "Renamed to Canada Groceries & Essentials Benefit (CGEB) from July 2026 with +25% permanent increase"
+      "notes": "CGEB steady-state = 2026-27 indexed GST base x1.25 (single $679 = $543 x1.25; couple $890 = $712 x1.25). Transition-year single total ~$950 includes one-time top-up. Component breakdown derived from CRA indexed GST amounts; CRA has not published a separate CGEB component table."
     },
     {
       "id": "F3",
@@ -292,11 +306,11 @@
       "en": "Canada Disability Benefit",
       "cat": "federal",
       "scope": "federal",
-      "dataAsOf": "2025-26",
-      "max": "最高 $200/月（$2,400/年）",
+      "dataAsOf": "2026-27",
+      "max": "最高 $204/月（$2,448/年）",
       "url": "https://www.canada.ca/en/services/benefits/disability/canada-disability-benefit.html",
-      "desc": "持残障税收抵免(DTC)批准的低收入人群月度补贴，2025年6月起开放申请。",
-      "desc_en": "Monthly payments for low-income working-age Canadians with approved DTC.",
+      "desc": "持残障税收抵免(DTC)批准的低收入人群月度补贴，2025年6月起开放申请。2026年7月起最高额按2%指数化升至$204/月。",
+      "desc_en": "Monthly payments for low-income working-age Canadians with approved DTC. Maximum reindexed to $204/mo from July 2026 (2.0% indexation).",
       "conditions": [
         "已获批DTC",
         "18-64岁",
@@ -308,11 +322,11 @@
         "Filed taxes"
       ],
       "calculation": {
-        "maxMonthly": 200,
-        "maxAnnual": 2400,
+        "maxMonthly": 204,
+        "maxAnnual": 2448,
         "incomeThreshold": 23000,
         "phaseOutRate": 0.2,
-        "fullPhaseOutIncome": 35000
+        "fullPhaseOutIncome": 35240
       }
     }
   ]
