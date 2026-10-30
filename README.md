@@ -184,3 +184,4 @@ This tool is for informational purposes only. Benefit amounts are estimates base
 
 MIT — free to use, modify, and distribute. See [LICENSE](LICENSE).
 <!-- entire-agent-test: minimal change to trigger the Entire code review agent run -->
+<!-- entire trial test: second tiny commit -->
